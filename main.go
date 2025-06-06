@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sol/floortracker/constants"
+)
 
 func main() {
-	fmt.Println("Hello")
+	fmt.Println(constants.FloorReq("degods"))
 }
