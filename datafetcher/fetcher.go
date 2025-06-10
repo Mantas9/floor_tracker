@@ -6,7 +6,7 @@ import (
 	"sol/floortracker/constants"
 )
 
-func GetStats(symbol string) string {
+func GetStats(symbol string, ch chan []byte) {
 	url := constants.StatsReq(symbol)
 
 	req, _ := http.NewRequest("GET", url, nil)
@@ -18,5 +18,5 @@ func GetStats(symbol string) string {
 	defer res.Body.Close()
 	body, _ := io.ReadAll(res.Body)
 
-	return string(body)
+	ch <- body
 }
