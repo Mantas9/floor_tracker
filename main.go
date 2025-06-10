@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"sol/floortracker/constants"
+	"sol/floortracker/datafetcher"
 )
 
 func main() {
-	fmt.Println(constants.FloorReq("degods"))
+	fmt.Println(datafetcher.GetStats("degods"))
 }
