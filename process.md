@@ -20,6 +20,5 @@ A CLI tool which returns various info about a certain listing on MagicEden
 
 1. User inputs a command and argument/arguments.
 2. Main module parses arguments and options.
-3. `main` module calls `datafetcher` module, which makes a request to MagicEden's dev API and returns the fetched data in JSON form.
-4. `main` module calls the ``formatter` module to format gotten data into a specified interface
-5. `main` module displays data nicely in terminal
+3. `main` module calls `getStats()` function which returns a struct of stats data using `datafetcher` and `jsonworker` modules to fetch from ME API and format into JSON
+4.

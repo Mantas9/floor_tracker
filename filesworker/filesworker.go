@@ -1,7 +1,8 @@
-package jsonworker
+package filesworker
 
 import (
 	"encoding/json"
+	"os"
 	"sol/floortracker/constants"
 )
 
@@ -10,6 +11,8 @@ type Stats struct {
 	Symbol      string
 	FloorPrice  float64
 	ListedCount float64
+
+	RawData []byte
 }
 
 func (s *Stats) UnmarshalJSON(data []byte) error {
@@ -22,9 +25,18 @@ func (s *Stats) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	// Assign JSON values
 	s.Symbol = statsData["symbol"].(string)
 	s.FloorPrice = statsData["floorPrice"].(float64) * constants.LamportsToSol
 	s.ListedCount = statsData["listedCount"].(float64)
+	s.RawData = data // original raw data
 
 	return nil
+}
+
+func (s *Stats) WriteToJSON() error {
+	// Write to JSON
+	err := os.WriteFile("./data.json", s.RawData, 0644)
+
+	return err
 }
