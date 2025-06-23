@@ -54,11 +54,13 @@ func main() {
 
 	for i := 0; i < len(args); i++ {
 		// Call getStats
-		go getStats(args[i], ch)
+		getStats(args[i], ch)
 
 		// Append new stats to list
 		data = append(data, <-ch)
 	}
+
+	fmt.Println(data[0])
 
 	// Onde data list is filled, time to export accordingly
 	switch export {
@@ -96,10 +98,7 @@ func main() {
 
 	case CSV:
 
-		// Waitgroup
 		wg.Add(1)
-
-		// Concurrent writing
 		go func() {
 			defer wg.Done()
 
