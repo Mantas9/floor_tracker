@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"os"
 	"sol/floortracker/constants"
+
+	"github.com/gocarina/gocsv"
 )
 
 // / Result structs
@@ -31,12 +33,30 @@ func (s *Stats) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *Stats) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s)
-}
+func WriteJSON(data []Stats) error {
+	// Marshal data to JSON
+	jsonData, err := json.Marshal(data)
 
-func WriteJSON(data []byte) error {
-	err := os.WriteFile("./stats.json", data, 0644) // Write string data to file
+	if err != nil { // Error check
+		return err
+	}
+
+	err = os.WriteFile("./stats.json", jsonData, 0644) // Write string data to file
 
 	return err
+}
+
+func WriteCSV(data []Stats) error {
+	// Create result CSV file
+	file, err := os.Create("stats.csv")
+	if err != nil {
+		return err
+	}
+
+	// Marshal data struct list to CSV and write to file
+	if err := gocsv.MarshalFile(&data, file); err != nil {
+		return err
+	}
+
+	return nil
 }

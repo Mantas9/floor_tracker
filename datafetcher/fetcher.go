@@ -6,17 +6,31 @@ import (
 	"sol/floortracker/constants"
 )
 
-func GetStats(symbol string, ch chan []byte) {
+func GetStats(symbol string, ch chan []byte) error {
 	url := constants.StatsReq(symbol)
 
-	req, _ := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", url, nil)
+
+	if err != nil {
+		return err
+	}
 
 	req.Header.Add("accept", "application/json")
 
-	res, _ := http.DefaultClient.Do(req)
+	res, err := http.DefaultClient.Do(req)
+
+	if err != nil {
+		return err
+	}
 
 	defer res.Body.Close()
-	body, _ := io.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
+
+	if err != nil {
+		return err
+	}
 
 	ch <- body
+
+	return nil
 }
