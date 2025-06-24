@@ -4,7 +4,7 @@
 
 ## What is Floor Tracker?
 
-A CLI tool which returns various info about a certain listing on MagicEden
+A CLI tool which returns various info about a certain listing on MagicEden.
 
 ## Usage
 
@@ -19,3 +19,7 @@ A CLI tool which returns various info about a certain listing on MagicEden
 1. User inputs a command and argument/arguments.
 2. Program concurrently fetches stats via the MagicEden API
 3. The fetched stats are then exported in the preferred format
+
+---
+
+This is my first mini project in my Go journey.
