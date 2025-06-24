@@ -63,7 +63,8 @@ func main() {
 			stat, err := getStats(sym)
 
 			if err != nil {
-				panic(err)
+				fmt.Printf("Error in fetching stats:\n%s", err)
+				os.Exit(1)
 			}
 
 			// Push to channel when done
